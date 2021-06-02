@@ -16,6 +16,9 @@ class Airport {
   }
 
   takeoff(plane) {
+    if(this.isStormy()) {
+      throw new Error('Takeoff is prevented during storm');
+    }
     plane.takeoff();
   }
 

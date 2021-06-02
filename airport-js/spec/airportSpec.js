@@ -40,9 +40,13 @@ describe("Airport", function() {
     })
   })
   describe("weather", function() {
-    it("throws an error when stormy", function() {
+    it("throws an error on landing when stormy", function() {
       spyOn(airport, 'isStormy').and.returnValue(true);
       expect( function(){ airport.land(plane); } ).toThrowError('Landing is prevented during storm');
+    })
+    it("throws an error on takeoff when stormy", function() {
+      spyOn(airport, 'isStormy').and.returnValue(true);
+      expect( function(){ airport.takeoff(plane); } ).toThrowError('Takeoff is prevented during storm');
     })
   })
 })
