@@ -5,7 +5,7 @@ class Plane {
   }
 
   land() {
-    this.state = "landed"
+    this.state = "landed";
   }
 
   takeoff() {
