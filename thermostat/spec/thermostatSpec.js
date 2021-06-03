@@ -13,25 +13,34 @@ describe("Thermostat", function() {
 
   describe("up", function() {
     it("increases the temp", function() {
-      thermostat.up(4);
-      expect(thermostat.temp).toEqual(24);
+      thermostat.up();
+      expect(thermostat.temp).toEqual(21);
     })
     it("has max temp of 25 when power saving is on", function() {
-      expect( function(){ thermostat.up(6); }).toThrowError("The maximum temperature is 25 degrees with Power Saving");
+      for(i = 1; i <= 5; i++) {
+        thermostat.up();
+      }
+      expect( function(){ thermostat.up(); }).toThrowError("The maximum temperature is 25 degrees with Power Saving");
     })
     it("has max temp of 32 when power saving is off", function() {
       thermostat.powerSavingModeOff();
-      expect( function(){ thermostat.up(13); }).toThrowError("The maximum temperature is 32 degrees without Power Saving");
+      for(i = 1; i <= 12; i++) {
+        thermostat.up();
+      }
+      expect( function(){ thermostat.up(); }).toThrowError("The maximum temperature is 32 degrees without Power Saving");
     })
   })
 
   describe("down", function() {
     it("decreases the temp", function() {
-      thermostat.down(10);
-      expect(thermostat.temp).toEqual(10);
+      thermostat.down();
+      expect(thermostat.temp).toEqual(19);
     })
     it("has a minimum temp of 10 degrees", function() {
-      expect( function(){ thermostat.down(11); }).toThrowError("The minimum temperature is 10 degrees");
+      for(i = 1; i <= 10; i++) {
+        thermostat.down();
+      }
+      expect( function(){ thermostat.down(); }).toThrowError("The minimum temperature is 10 degrees");
     })
   })
 
@@ -52,16 +61,22 @@ describe("Thermostat", function() {
 
   describe("getEnergyUsage", function() {
     it("returns low-usage when temp is below 18", function() {
-      thermostat.down(3);
+      for(i = 1; i <= 3; i++) {
+        thermostat.down();
+      }
       expect(thermostat.getEnergyUsage()).toEqual("low-usage");
     })
     it("returns medium-usage when temp is up to 25", function() {
-      thermostat.up(5);
+      for(i = 1; i <= 5; i++) {
+        thermostat.up();
+      }
       expect(thermostat.getEnergyUsage()).toEqual("medium-usage");
     })
     it("returns high-usage when temp is more than 25", function() {
       thermostat.powerSavingModeOff();
-      thermostat.up(6);
+      for(i = 1; i <= 6; i++) {
+        thermostat.up();
+      }
       expect(thermostat.getEnergyUsage()).toEqual("high-usage");
     })
   })

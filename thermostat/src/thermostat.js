@@ -10,21 +10,21 @@ class Thermostat {
     this.powerSavingMode = true
   }
 
-  up(number) {
-    if(this.powerSavingMode == true && (this.temp + number) > this.MAX_TEMP_PS) {
+  up() {
+    if(this.powerSavingMode == true && (this.temp + 1) > this.MAX_TEMP_PS) {
       throw new Error("The maximum temperature is 25 degrees with Power Saving");
     }
-    if(this.powerSavingMode == false && (this.temp + number) > this.MAX_TEMP) {
+    if(this.powerSavingMode == false && (this.temp + 1) > this.MAX_TEMP) {
       throw new Error("The maximum temperature is 32 degrees without Power Saving");
     }
-    this.temp += number;
+    this.temp += 1;
   }
 
-  down(number) {
-    if((this.temp - number) < this.MIN_TEMP) {
+  down() {
+    if((this.temp - 1) < this.MIN_TEMP) {
       throw new Error('The minimum temperature is 10 degrees');
     }
-    this.temp -= number;
+    this.temp -= 1;
   }
 
   powerSavingModeOff() {
