@@ -41,4 +41,28 @@ describe("Thermostat", function() {
       expect(thermostat.powerSavingMode).toEqual(false);
     })
   })
+
+  describe("resetTemp", function() {
+    it("resets temp to 20", function() {
+      thermostat.up(3);
+      thermostat.resetTemp();
+      expect(thermostat.temp).toEqual(20);
+    })
+  })
+
+  describe("getEnergyUsage", function() {
+    it("returns low-usage when temp is below 18", function() {
+      thermostat.down(3);
+      expect(thermostat.getEnergyUsage()).toEqual("low-usage");
+    })
+    it("returns medium-usage when temp is up to 25", function() {
+      thermostat.up(5);
+      expect(thermostat.getEnergyUsage()).toEqual("medium-usage");
+    })
+    it("returns high-usage when temp is more than 25", function() {
+      thermostat.powerSavingModeOff();
+      thermostat.up(6);
+      expect(thermostat.getEnergyUsage()).toEqual("high-usage");
+    })
+  })
 })
