@@ -18,7 +18,10 @@ class Airport {
   takeoff(plane) {
     if(this.isStormy()) {
       throw new Error('Takeoff is prevented during storm');
+    } else if(this.planes.includes(plane) == false) {
+      throw new Error('This plane is not landed at this airport')
     }
+    
     plane.takeoff();
   }
 

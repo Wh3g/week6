@@ -29,6 +29,10 @@ describe("Airport", function() {
       airport.takeoff(plane)
       expect(plane.getState()).toEqual("flying");
     })
+    it("fails when the plane is not landed at that airport", function() {
+      spyOn(airport, 'isStormy').and.returnValue(false);
+      expect( function(){ airport.takeoff(plane); } ).toThrowError('This plane is not landed at this airport')
+    })
   })
   describe("constructor", function() {
     it("has a default capacity of 20", function() {
