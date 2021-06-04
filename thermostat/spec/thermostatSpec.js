@@ -51,6 +51,14 @@ describe("Thermostat", function() {
     })
   })
 
+  describe("powerSavingModeOn", function() {
+    it("turns on power saving mode", function() {
+      thermostat.powerSavingModeOff();
+      thermostat.powerSavingModeOn();
+      expect(thermostat.powerSavingMode).toEqual(true);
+    })
+  })
+
   describe("resetTemp", function() {
     it("resets temp to 20", function() {
       thermostat.up(3);
